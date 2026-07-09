@@ -1,0 +1,65 @@
+version: "3.9"
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: hotel_mysql
+    restart: always
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hotel_gestion
+
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+
+    networks:
+      - hotel_network
+
+  postgres:
+    image: postgres:16
+    container_name: hotel_postgres
+    restart: always
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: hotel_operaciones
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres-init:/docker-entrypoint-initdb.d
+
+    networks:
+      - hotel_network
+
+  adminer:
+    image: adminer
+    container_name: hotel_adminer
+    restart: always
+
+    ports:
+      - "8080:8080"
+
+    depends_on:
+      - mysql
+      - postgres
+
+    networks:
+      - hotel_network
+
+volumes:
+  mysql_data:
+  postgres_data:
+
+networks:
+  hotel_network:
+    driver: bridge
