@@ -93,3 +93,92 @@ WHERE estado='ACTIVO';
 SELECT
 ROUND(AVG(tiempo_espera_minutos),2) AS promedio_espera
 FROM encuesta;
+
+
+-- EVENTOS
+
+SELECT
+e.codigo_evento,
+h.nombre_oficial,
+c.nombre AS campania,
+e.nombre_evento,
+e.tipo_evento,
+e.fecha_inicio,
+e.fecha_fin,
+e.presupuesto,
+e.canal_marketing,
+e.estado
+FROM evento e
+INNER JOIN hotel h
+ON e.codigo_hotel = h.codigo_hotel
+INNER JOIN campania c
+ON e.codigo_campania = c.codigo_campania;
+
+-- EVENTOS POR HOTEL
+
+SELECT
+h.nombre_oficial,
+COUNT(e.codigo_evento) AS total_eventos
+FROM evento e
+INNER JOIN hotel h
+ON e.codigo_hotel = h.codigo_hotel
+GROUP BY h.nombre_oficial
+ORDER BY total_eventos DESC;
+
+-- PRESUPUESTO DE EVENTOS POR HOTEL
+
+SELECT
+h.nombre_oficial,
+SUM(e.presupuesto) AS presupuesto_eventos
+FROM evento e
+INNER JOIN hotel h
+ON e.codigo_hotel = h.codigo_hotel
+GROUP BY h.nombre_oficial
+ORDER BY presupuesto_eventos DESC;
+
+-- EVENTOS POR TIPO
+
+SELECT
+tipo_evento,
+COUNT(*) AS total
+FROM evento
+GROUP BY tipo_evento
+ORDER BY total DESC;
+
+-- EVENTOS POR CANAL DE MARKETING
+
+SELECT
+canal_marketing,
+COUNT(*) AS total
+FROM evento
+GROUP BY canal_marketing
+ORDER BY total DESC;
+
+-- PRESUPUESTO POR CANAL
+
+SELECT
+canal_marketing,
+SUM(presupuesto) AS presupuesto_total
+FROM evento
+GROUP BY canal_marketing
+ORDER BY presupuesto_total DESC;
+
+-- EVENTOS POR ESTADO
+
+SELECT
+estado,
+COUNT(*) AS cantidad
+FROM evento
+GROUP BY estado;
+
+-- PRESUPUESTO TOTAL EN EVENTOS
+
+SELECT
+SUM(presupuesto) AS inversion_total_eventos
+FROM evento;
+
+-- PROMEDIO DE PRESUPUESTO POR EVENTO
+
+SELECT
+ROUND(AVG(presupuesto),2) AS promedio_presupuesto
+FROM evento;

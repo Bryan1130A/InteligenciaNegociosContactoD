@@ -111,6 +111,39 @@ CREATE TABLE factura(
 
 );
 
+----------------------------------------------------
+-- TABLA EVENTO (Marketing)
+----------------------------------------------------
+
+CREATE TABLE evento(
+
+    codigo_evento VARCHAR(10) PRIMARY KEY,
+
+    codigo_hotel VARCHAR(10)
+    REFERENCES hotel(codigo_hotel),
+
+    nombre_evento VARCHAR(120) NOT NULL,
+
+    tipo_evento VARCHAR(50),
+
+    fecha_inicio DATE NOT NULL,
+
+    fecha_fin DATE NOT NULL,
+
+    presupuesto NUMERIC(12,2),
+
+    canal_marketing VARCHAR(50),
+
+    descripcion VARCHAR(250),
+
+    estado VARCHAR(20)
+
+);
+
+----------------------------------------------------
+-- ÍNDICES
+----------------------------------------------------
+
 CREATE INDEX idx_huesped_documento
 ON huesped(documento);
 
@@ -122,3 +155,9 @@ ON factura(fecha);
 
 CREATE INDEX idx_habitacion_estado
 ON habitacion(estado);
+
+CREATE INDEX idx_evento_fecha_inicio
+ON evento(fecha_inicio);
+
+CREATE INDEX idx_evento_hotel
+ON evento(codigo_hotel);

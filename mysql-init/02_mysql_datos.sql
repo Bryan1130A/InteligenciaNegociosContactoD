@@ -615,3 +615,68 @@ VALUES
 ('2028-07-29','HTL009','1800000020',2,35,'Habitación con ruido.'),
 
 ('2028-08-17','HTL010','1800000021',5,4,'Volvería nuevamente.');
+
+INSERT INTO evento
+(codigo_evento,codigo_campania,codigo_hotel,nombre_evento,tipo_evento,
+fecha_inicio,fecha_fin,presupuesto,canal_marketing,descripcion,estado)
+VALUES
+
+('EV001','CAM001','HTL001','Black Friday Quito','Promoción',
+'2025-01-05','2025-01-15',
+5000,'Facebook',
+'Descuentos en habitaciones Premium',
+'FINALIZADO'),
+
+('EV002','CAM002','HTL002','San Valentín Quito','Temporada',
+'2025-02-01','2025-02-14',
+3500,'Instagram',
+'Paquetes románticos',
+'FINALIZADO'),
+
+('EV003','CAM003','HTL003','Congreso Empresarial','Corporativo',
+'2025-05-10','2025-05-20',
+7000,'LinkedIn',
+'Promoción para empresas',
+'FINALIZADO'),
+
+('EV004','CAM004','HTL004','Festival Cuenca','Cultural',
+'2025-07-05','2025-07-20',
+4500,'Google Ads',
+'Festival turístico',
+'FINALIZADO'),
+
+('EV005','CAM005','HTL005','Vacaciones Manta','Promoción',
+'2025-07-15','2025-08-15',
+6000,'Facebook',
+'Promoción familiar',
+'FINALIZADO'),
+
+('EV006','CAM006','HTL006','Navidad Ambato','Temporada',
+'2025-12-01','2025-12-31',
+8000,'Instagram',
+'Campaña navideña',
+'FINALIZADO'),
+
+('EV007','CAM007','HTL007','Verano Loja','Promoción',
+'2026-01-10','2026-02-15',
+5500,'TikTok',
+'Promoción de temporada',
+'FINALIZADO'),
+
+('EV008','CAM008','HTL008','Resort Salinas','Promoción',
+'2026-02-05','2026-03-10',
+6200,'Meta Ads',
+'Promoción turística',
+'FINALIZADO'),
+
+('EV009','CAM009','HTL009','Promo Riobamba','Promoción',
+'2026-05-01','2026-06-10',
+4800,'Google Ads',
+'Descuentos especiales',
+'FINALIZADO'),
+
+('EV010','CAM010','HTL010','Vacaciones Santo Domingo','Temporada',
+'2026-07-01','2026-08-20',
+7100,'Facebook',
+'Campaña vacacional',
+'ACTIVO');

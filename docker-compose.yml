@@ -2,6 +2,10 @@ version: "3.9"
 
 services:
 
+  # ==========================================
+  # MYSQL - GESTIÓN
+  # ==========================================
+
   mysql:
     image: mysql:8.0
     container_name: hotel_mysql
@@ -21,15 +25,20 @@ services:
     networks:
       - hotel_network
 
+
+  # ==========================================
+  # POSTGRES - OPERACIONES
+  # ==========================================
+
   postgres:
     image: postgres:16
     container_name: hotel_postgres
     restart: always
 
     environment:
+      POSTGRES_DB: hotel_operaciones
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: hotel_operaciones
 
     ports:
       - "5432:5432"
@@ -40,6 +49,36 @@ services:
 
     networks:
       - hotel_network
+
+
+  # ==========================================
+  # POSTGRES - STAGING
+  # ==========================================
+
+  staging:
+    image: postgres:16
+    container_name: hotel_staging
+    restart: always
+
+    environment:
+      POSTGRES_DB: hotel_stage
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5434:5432"
+
+    volumes:
+      - stage_data:/var/lib/postgresql/data
+      - ./stage-init:/docker-entrypoint-initdb.d
+
+    networks:
+      - hotel_network
+
+
+  # ==========================================
+  # ADMINER PRINCIPAL
+  # ==========================================
 
   adminer:
     image: adminer
@@ -56,10 +95,36 @@ services:
     networks:
       - hotel_network
 
+
+  # ==========================================
+  # ADMINER STAGING
+  # ==========================================
+
+  adminer_stage:
+    image: adminer
+    container_name: hotel_adminer_stage
+    restart: always
+
+    ports:
+      - "8090:8080"
+
+    depends_on:
+      - staging
+
+    networks:
+      - hotel_network
+
+
 volumes:
+
   mysql_data:
+
   postgres_data:
 
+  stage_data:
+
+
 networks:
+
   hotel_network:
     driver: bridge

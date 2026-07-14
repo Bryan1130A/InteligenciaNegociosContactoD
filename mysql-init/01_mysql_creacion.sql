@@ -112,6 +112,37 @@ CREATE TABLE campania(
     REFERENCES temporada(codigo_temporada)
 
 );
+CREATE TABLE evento(
+
+    codigo_evento VARCHAR(10) PRIMARY KEY,
+
+    codigo_campania VARCHAR(10),
+
+    codigo_hotel VARCHAR(10),
+
+    nombre_evento VARCHAR(120) NOT NULL,
+
+    tipo_evento VARCHAR(50),
+
+    fecha_inicio DATE,
+
+    fecha_fin DATE,
+
+    presupuesto DECIMAL(12,2),
+
+    canal_marketing VARCHAR(50),
+
+    descripcion VARCHAR(250),
+
+    estado VARCHAR(20),
+
+    FOREIGN KEY(codigo_campania)
+    REFERENCES campania(codigo_campania),
+
+    FOREIGN KEY(codigo_hotel)
+    REFERENCES hotel(codigo_hotel)
+
+);
 
 CREATE TABLE encuesta(
 
@@ -151,3 +182,12 @@ ON campania(estado);
 
 CREATE INDEX idx_temporada_fechas
 ON temporada(fecha_inicio,fecha_fin);
+
+CREATE INDEX idx_evento_fecha
+ON evento(fecha_inicio);
+
+CREATE INDEX idx_evento_hotel
+ON evento(codigo_hotel);
+
+CREATE INDEX idx_evento_estado
+ON evento(estado);

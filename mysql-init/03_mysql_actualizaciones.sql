@@ -119,3 +119,48 @@ WHERE id_encuesta=12;
 UPDATE encuesta
 SET comentario='Pésimo servicio.'
 WHERE id_encuesta=15;
+
+-- ==========================
+-- EVENTOS
+-- ==========================
+
+UPDATE evento
+SET presupuesto = 5500.00
+WHERE codigo_evento = 'EV001';
+
+UPDATE evento
+SET canal_marketing = 'Meta Ads'
+WHERE codigo_evento = 'EV002';
+
+UPDATE evento
+SET estado = 'FINALIZADO'
+WHERE codigo_evento = 'EV003';
+
+UPDATE evento
+SET presupuesto = 7000.00
+WHERE codigo_evento = 'EV004';
+
+UPDATE evento
+SET descripcion = 'Promoción familiar con descuentos del 25%'
+WHERE codigo_evento = 'EV005';
+
+UPDATE evento
+SET estado = 'ACTIVO'
+WHERE codigo_evento = 'EV006';
+
+UPDATE evento
+SET canal_marketing = 'Google Ads'
+WHERE codigo_evento = 'EV007';
+
+UPDATE evento
+SET presupuesto = 6500.00
+WHERE codigo_evento = 'EV008';
+
+UPDATE evento
+SET estado = 'FINALIZADO'
+WHERE codigo_evento = 'EV009';
+
+UPDATE evento
+SET presupuesto = 12000.00,
+    canal_marketing = 'Facebook e Instagram'
+WHERE codigo_evento = 'EV010';
